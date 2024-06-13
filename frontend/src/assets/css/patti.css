@@ -1,0 +1,199 @@
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  /* padding-top: 20px; */
+}
+
+.login_bg_img{
+  /* background-image: url("../images/login-bg.jpg"); */
+  background-repeat: no-repeat;
+ background-position: center;
+ background-size: 80%;
+ 
+}
+
+.left {
+  width: 65%;
+  left: 0;
+  background-color: #fff;
+}
+
+.right {
+  width: 38%;
+  right: 0;
+  background-color: white;
+
+}
+
+.login-container {
+  width: 100%;
+  right: 0;
+  background-color: white;
+  margin: auto;
+  display: flex;
+  /* flex-direction: column; */
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+/* form element */
+
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6b6b;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input {
+  margin-right: 5px;
+}
+
+.forgot-password {
+  color: #ff6b6b;
+  text-decoration: none;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* side bar */
+.sidebar {
+  height: 100vh;
+  transition: width 0.3s;
+  /* overflow: hidden;
+  background-image: url('../images/caardsstripe.jpg'); Replace with your image path
+  background-size: cover; Adjust as needed (e.g., contain) */
+}
+
+.sidebar.open {
+  width: 250px;
+}
+
+.sidebar.closed {
+  width: 70px;
+}
+
+.header {
+  background-color: #343a40;
+}
+
+
+
+/* .navbar {
+  background-image: url('../images/caardsstripe.jpg'); Replace with your image path
+  background-size: cover; Adjust as needed (e.g., contain)
+  
+} */
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav-link .icon {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.nav-link .menu-text {
+  transition: opacity 0.3s;
+}
+
+.nav-link:hover {
+  background-color: #495057;
+}
+
+/* table */
+.table-title {
+  padding-bottom: 10px;
+  margin: 0 0 10px;
+}
+.table-title h2 {
+  margin: 8px 0 0;
+  font-size: 24px;
+}
+
+.search-box {
+  position: relative;        
+  float: right;
+}
+.search-box input {
+  height: 34px;
+  border-radius: 20px;
+  padding-left: 35px;
+  border-color: #ddd;
+  box-shadow: none;
+}
+.search-box input:focus {
+border-color: #3FBAE4;
+}
+.search-box i {
+  color: #a0a5b1;
+  position: absolute;
+  font-size: 19px;
+  top: 8px;
+  left: 10px;
+}
+
+
+/* modal design for logout */
+.modal-container{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 15px;
+  width: 350px;
+}
+
+.button-container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/*end of modal design for logout */

@@ -1,5 +1,5 @@
 import express from "express"
-import {registerUser, loginUser, logoutUser, getUserList, getUserById, updateUser, deleteUser, forgotPasswordOTP, otpVerify, passwordUpdate, getLeaderboard } from "../controller/User.controller.js"
+import {registerUser, loginUser, logoutUser, getProfileList, getUserById, updateUser, deleteUser, forgotPasswordOTP, otpVerify, passwordUpdate, getLeaderboard } from "../controller/User.controller.js"
 import Auth from "../middleware/Auth.js"
 
 const router = express.Router()
@@ -13,7 +13,7 @@ router.post("/api/user/logout",logoutUser)
 
 
 // api route for fetching profile of users
-router.get("/api/user/userlist",Auth,getUserList)
+router.post("/api/user/profilelist",Auth,getProfileList)
 
 //api for fetching leaderboard
 router.post('/api/user/getleaderboard',Auth,getLeaderboard)

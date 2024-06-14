@@ -203,9 +203,9 @@ const logoutUser = async(req,res) => {
     }
 }
 
-const getUserList = async(req,res) => {
+const getProfileList = async(req,res) => {
     try {
-        const users = await User.find().select('name email  mobile')
+        const users = await User.find().select(' name, email, mobile, otp, password, device_id, device_type, notification_token, game_type')
 
         return res.status(200).json({
             code:200,
@@ -499,6 +499,4 @@ const passwordUpdate = async(req,res) => {
 
 
 
-
-
-export  {registerUser,loginUser,logoutUser,getUserList,getLeaderboard,getUserById,updateUser,deleteUser,forgotPasswordOTP, otpVerify,passwordUpdate} 
+export  {registerUser,loginUser,logoutUser,getProfileList,getLeaderboard,getUserById,updateUser,deleteUser,forgotPasswordOTP, otpVerify,passwordUpdate} 

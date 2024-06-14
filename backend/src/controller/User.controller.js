@@ -80,9 +80,7 @@ const registerUser = async (req, res) => {
             const token = jwt.sign({
                 email: newUser.email,
                 id: newUser._id,
-            }, process.env.JWT_SECRET_KEY,{
-                expiresIn: "3600000000000s", // Token expires
-            });
+            }, process.env.JWT_SECRET_KEY,);
             
 
             return res.status(201).json({
@@ -154,10 +152,7 @@ const loginUser = async (req,res) => {
            const token = jwt.sign({
                 email: user.email,
                 id: user._id,
-            }, process.env.JWT_SECRET_KEY,{
-                expiresIn: "3600000000000s", // Token expires in one hour
-                
-            });
+            }, process.env.JWT_SECRET_KEY,);
 
             
             return res.status(200).json({
@@ -225,6 +220,28 @@ const getUserList = async(req,res) => {
             status:false,
             message:"Server side error while fetching list of users",
             data:{}
+        })
+    }
+}
+
+const getLeaderboard = async(req,res) => {
+    try {
+       //fetch all user from the db , selecting only name and total coins , and sort the result by 'total_coin in descending order
+       const users = await User.find({}, 'name total_coin').sort({ total_coin: -1}).exec()
+
+       //success response with the leaderboard data
+       res.status(200).json({
+        code: 200,
+        status:true,
+        message:"leaderboard fetched successfully",
+        data: users
+       })
+    } catch (error) {
+        console.log("error while fetching user profile: ",);
+        res.status(500).json({
+            status:false,
+            message:"server side error while fetching leadeboard list ",
+            error: error.message
         })
     }
 }
@@ -484,4 +501,4 @@ const passwordUpdate = async(req,res) => {
 
 
 
-export  {registerUser,loginUser,logoutUser,getUserList,getUserById,updateUser,deleteUser,forgotPasswordOTP, otpVerify,passwordUpdate} 
+export  {registerUser,loginUser,logoutUser,getUserList,getLeaderboard,getUserById,updateUser,deleteUser,forgotPasswordOTP, otpVerify,passwordUpdate} 

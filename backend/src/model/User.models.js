@@ -40,15 +40,15 @@ const userSchema = new mongoose.Schema({
         required: true,
       },
       total_game: {
-        type: String,
+        type: Number,
         required: true,
       },
       total_win: {
-        type: String,
+        type: Number,
         required: true,
       },
       total_coin: {
-        type: String,
+        type: Number,
         required: true,
       },
       avtar_id: {

@@ -80,7 +80,10 @@ const registerUser = async (req, res) => {
             const token = jwt.sign({
                 email: newUser.email,
                 id: newUser._id,
-            }, process.env.JWT_SECRET_KEY);
+            }, process.env.JWT_SECRET_KEY,{
+                expiresIn: "3600000000000s", // Token expires
+            });
+            
 
             return res.status(201).json({
                 data: {
@@ -113,7 +116,7 @@ const registerUser = async (req, res) => {
         return res.status(500).json({
             code: 500,
             status: false,
-            message: req.body,
+            message:"error registering user",
             message2: error,
             data: {}
         });
@@ -148,14 +151,19 @@ const loginUser = async (req,res) => {
             })
         }
         
-        const token = jwt.sign({
-            email:user.email,
-            id:user._id
-        },process.env.JWT_SECRET_KEY)
+           const token = jwt.sign({
+                email: user.email,
+                id: user._id,
+            }, process.env.JWT_SECRET_KEY,{
+                expiresIn: "3600000000000s", // Token expires in one hour
+                
+            });
 
-       
-        return res.status(200).json({
-           
+            
+            return res.status(200).json({
+            code:200,
+            status:true,
+            message:'User logged in successfully',
             data:{
                 _id: user._id,
                 name: user.name,
@@ -166,11 +174,8 @@ const loginUser = async (req,res) => {
                 total_win: user.total_win,
                 total_coin: user.total_coin,
                 avtar_id: user.avtar_id,
-                token: user.token,
+                token,
             },
-            code:200,
-            status:true,
-            message:'User logged in successfully',
         })
 
     } catch (error) {

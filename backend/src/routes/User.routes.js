@@ -13,19 +13,19 @@ router.post("/api/user/logout",logoutUser)
 
 
 // api route for fetching profile of users
-router.get("/api/user/userlist",getUserList)
+router.get("/api/user/userlist",Auth,getUserList)
 //api route for feetching user by id
-router.get("/api/user/userbyid/:id",getUserById)
+router.get("/api/user/userbyid/:id",Auth,getUserById)
 // updating edit user
-router.put("/api/user/updateUser",updateUser)
+router.put("/api/user/updateUser",Auth,updateUser)
 //deleing user from database by id
-router.delete("/api/user/deleteuser/:_id",deleteUser)
+router.delete("/api/user/deleteuser/:_id",Auth,deleteUser)
 //forgot password otp 
-router.post("/api/user/forgetpassotp",forgotPasswordOTP)
+router.post("/api/user/forgetpassotp",Auth,forgotPasswordOTP)
 //verify otp
-router.post("/api/user/vereifyotp",otpVerify)
+router.post("/api/user/vereifyotp",Auth,otpVerify)
 //password update
-router.put("/api/user/passwordupdate",passwordUpdate)
+router.put("/api/user/passwordupdate",Auth,passwordUpdate)
 
 
 export default router

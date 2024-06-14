@@ -35,68 +35,78 @@ const registerUser = async (req, res) => {
         }
 
         // Check OTP if provided
-        if (otp !== undefined && otp !== "123456") {
-            return res.status(400).json({
-                code: 400,
-                status: false,
-                message: "Invalid OTP, Please enter a valid OTP!"
+        if (otp !== undefined){
+            if (otp !== "123456") {
+                return res.status(201).json({
+                    code:400,
+                    status:false,
+                    message:"Invalid OTP, Please enter valid OTP!"
+                });
+            }
+        
+
+            // User validation if already registered
+            const existingUser = await User.findOne({ email });
+            if (existingUser) {
+                return res.status(409).json({
+                    code: 409,
+                    status: false,
+                    message: "User with this email already registered"
+                });
+            }
+
+            // Hashing password using bcrypt
+            const hashPassword = await bcrypt.hash(password, saltRounds);
+
+            // Create new user instance
+            const newUser = new User({
+                name,
+                email,
+                mobile,
+                password: hashPassword,
+                device_id,
+                device_type,
+                notification_token,
+                game_type,
+                total_game: "0",
+                total_win: "0",
+                total_coin: "5000",
+                avtar_id: "1",
             });
-        }
 
-        // User validation if already registered
-        const existingUser = await User.findOne({ email });
-        if (existingUser) {
-            return res.status(409).json({
-                code: 409,
-                status: false,
-                message: "User with this email already registered"
-            });
-        }
+            await newUser.save();
 
-        // Hashing password using bcrypt
-        const hashPassword = await bcrypt.hash(password, saltRounds);
-
-        // Create new user instance
-        const newUser = new User({
-            name,
-            email,
-            mobile,
-            password: hashPassword,
-            device_id,
-            device_type,
-            notification_token,
-            game_type,
-            total_game: "0",
-            total_win: "0",
-            total_coin: "5000",
-            avtar_id: "1",
-        });
-
-        await newUser.save();
-
-        // Generate a token
-        const token = jwt.sign({
-            email: newUser.email,
-            id: newUser._id,
-        }, process.env.JWT_SECRET_KEY);
-
-        return res.status(201).json({
-            data: {
-                _id: newUser._id,
-                name: newUser.name,
+            // Generate a token
+            const token = jwt.sign({
                 email: newUser.email,
-                mobile: newUser.mobile,
-                game_type: newUser.game_type,
-                total_game: newUser.total_game,
-                total_win: newUser.total_win,
-                total_coin: newUser.total_coin,
-                avtar_id: newUser.avtar_id,
-                token,
-            },
-            code: 201,
-            status: true,
-            message: 'User registered successfully',
-        });
+                id: newUser._id,
+            }, process.env.JWT_SECRET_KEY);
+
+            return res.status(201).json({
+                data: {
+                    _id: newUser._id,
+                    name: newUser.name,
+                    email: newUser.email,
+                    mobile: newUser.mobile,
+                    game_type: newUser.game_type,
+                    total_game: newUser.total_game,
+                    total_win: newUser.total_win,
+                    total_coin: newUser.total_coin,
+                    avtar_id: newUser.avtar_id,
+                    token,
+                },
+                code: 201,
+                status: true,
+                message: 'User registered successfully',
+            });
+
+        } else {
+            res.status(200).json({
+                code:200,
+                status:true,
+                message:"OTP sent sccessfully"
+            })
+        }
 
     } catch (error) {
         console.log("Error registering user \n", error);

@@ -268,7 +268,7 @@ const updateUser = async (req,res) => {
        
         const {id,name, total_game, total_win, total_coin, avtar_id} = req.body;
 
-        const updateUser = await User.findByIdAndUpdate(id,{ name,
+        const updateUser = await User.findByIdAndUpdate(id,{    name,
             total_game,
             total_win,
             total_coin,

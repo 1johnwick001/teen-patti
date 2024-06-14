@@ -17,7 +17,7 @@ router.get("/api/user/userlist",Auth,getUserList)
 //api route for feetching user by id
 router.get("/api/user/userbyid/:id",Auth,getUserById)
 // updating edit user
-router.put("/api/user/updateUser",Auth,updateUser)
+router.post("/api/user/updateUser",Auth,updateUser)
 //deleing user from database by id
 router.delete("/api/user/deleteuser/:_id",Auth,deleteUser)
 //forgot password otp 

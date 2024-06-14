@@ -113,7 +113,8 @@ const registerUser = async (req, res) => {
         return res.status(500).json({
             code: 500,
             status: false,
-            message: "Error while registering user",
+            message: req.body,
+            message2: error,
             data: {}
         });
     }

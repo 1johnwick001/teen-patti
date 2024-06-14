@@ -205,12 +205,12 @@ const logoutUser = async(req,res) => {
 
 const getProfileList = async(req,res) => {
     try {
-        const users = await User.find().select(' name, email, mobile, otp, password, device_id, device_type, notification_token, game_type')
+        const users = await User.find().select(' name email mobile device_id device_type notification_token game_type')
 
         return res.status(200).json({
             code:200,
             status:true,
-            message:"user list fetched successfully",
+            message:"profile list fetched successfully",
             data:users
         })
     } catch (error) {
